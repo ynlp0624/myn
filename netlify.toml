@@ -1,0 +1,22 @@
+# 小雫短链生成器 · Netlify 部署配置 ♡
+
+[build]
+  command = "bun run build"
+  publish = ".next"
+
+# 用 bun 装依赖
+[install]
+  command = "bun install"
+
+# 环境变量（Next.js 16 需要 Node 18.18+）
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_VERSION = "16"
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+
+# Next.js 插件（@netlify/plugin-nextjs 会自动接管 .next 输出）
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# 短链跳转路由 /[code] 需要动态处理，插件会自动识别
+# 无需额外 redirects 配置
